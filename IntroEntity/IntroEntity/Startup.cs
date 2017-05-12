@@ -81,8 +81,72 @@ namespace IntroEntity
                 // }
 
                 // 8.	Addresses by Town Name 
-                var addresses = context.Addresses.OrderByDescending(a => a.Employees.Count).ThenBy(a => a.Town.Name)
-                    .Take(10);
+                // var addresses = context.Addresses.OrderByDescending(a => a.Employees.Count).ThenBy(a => a.Town.Name)
+                //     .Take(10);
+                // 
+                // foreach (Address address in addresses)
+                // {
+                //     content.AppendLine(
+                //         $"{address.AddressText}, {address.Town.Name} - {address.Employees.Count} employees");
+                // }
+
+                // 9.	Employee with id 147
+                // var employee = context.Employees.Find(147);
+                // var projects = employee.Projects.OrderBy(p => p.Name);
+                // 
+                // content.AppendLine($"{employee.FirstName} {employee.LastName} {employee.JobTitle}");
+                // foreach (Project project in projects)
+                // {
+                //     content.AppendLine(project.Name);
+                // }
+
+                // 10.	Departments with more than 5 employees
+                // var departments = context.Departments.Where(d => d.Employees.Count > 5).OrderBy(d => d.Employees.Count);
+                // 
+                // foreach (Department department in departments)
+                // {
+                //     content.AppendLine($"{department.Name} {department.Employee.FirstName}");
+                //     foreach (Employee departmentEmployee in department.Employees)
+                //     {
+                //         content.AppendLine(
+                //             $"{departmentEmployee.FirstName} {departmentEmployee.LastName} {departmentEmployee.JobTitle}");
+                //     }
+                // }
+
+                // 11.	Find Latest 10 Projects
+                // Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                // var latestProjects = context.Projects.OrderByDescending(p => p.StartDate).Take(10).OrderBy(p => p.Name);
+                // 
+                // foreach (Project latestProject in latestProjects)
+                // {
+                //     content.AppendLine(
+                //         $"{latestProject.Name} {latestProject.Description} {latestProject.StartDate} {latestProject.EndDate}");
+                // }
+
+                // 12.	Increase Salaries
+                // 
+                // var employees =
+                //     context.Employees.Where(e => e.Department.Name == "Engineering" ||
+                //                                  e.Department.Name == "Tool Design" ||
+                //                                  e.Department.Name == "Marketing" ||
+                //                                  e.Department.Name == "Information Services");
+                // foreach (Employee employee in employees)
+                // {
+                //     employee.Salary *= 1.12m;
+                //     content.AppendLine($"{employee.FirstName} {employee.LastName} (${employee.Salary})");
+                // }
+                //
+                // context.SaveChanges();
+
+                // 13.	Find Employees by First Name Starting with ‘SA’
+
+                string pattern = "SA";
+                var employees = context.Employees.Where(e => e.FirstName.StartsWith(pattern));
+                foreach (Employee employee in employees)
+                {
+                    content.AppendLine($"{employee.FirstName} {employee.LastName} " +
+                                       $"- {employee.JobTitle} - (${employee.Salary})");
+                }
 
                 File.WriteAllText("../../Output.txt", content.ToString());
             }
